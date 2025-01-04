@@ -60,6 +60,34 @@ public class Graph {
         }
     }
 
+    // Traversal BFS
+
+    // Perform BFS traversal starting from a source vertex
+    public void bfs(int source) {
+        Queue<Integer> queue = new LinkedList<>();
+        Set<Integer> visited = new HashSet<>();
+
+        visited.add(source);
+        queue.add(source);
+
+        System.out.println("BFS Traversal:");
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            System.out.print(current + " ");
+
+
+            for (int neighbor : adjacencyList.getOrDefault(current, new ArrayList<>())) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    queue.add(neighbor);
+                }
+            }
+        }
+        System.out.println();
+    }
+
+
+
     public static void main(String[] args) {
         Graph graph = new Graph();
 
@@ -71,12 +99,8 @@ public class Graph {
         System.out.println("Graph:");
         graph.printGraph();
 
-        System.out.println("\nRemoving edge 1 -> 2:");
-        graph.removeEdge(1, 2);
-        graph.printGraph();
-
-        System.out.println("\nRemoving vertex 3:");
-        graph.removeVertex(3);
-        graph.printGraph();
+        // Perform BFS traversal starting from vertex 1
+        System.out.println("BFS starting from vertex 1:");
+        graph.bfs(1);
     }
 }
