@@ -87,6 +87,32 @@ public class Graph {
     }
 
 
+    // Perform DFS traversal starting from a source vertex
+    public void dfs(int source) {
+        Stack<Integer> stack = new Stack<>();
+        Set<Integer> visited = new HashSet<>();
+
+        stack.push(source);
+        visited.add(source);
+
+        System.out.println("DFS Traversal:");
+        while (!stack.isEmpty()) {
+            int current = stack.pop();
+            System.out.print(current + " ");
+
+            // Visit all neighbors of the current vertex
+            for (int neighbor : adjacencyList.getOrDefault(current, new ArrayList<>())) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    stack.push(neighbor);
+                }
+            }
+        }
+        System.out.println();
+    }
+
+
+
 
     public static void main(String[] args) {
         Graph graph = new Graph();
@@ -102,5 +128,9 @@ public class Graph {
         // Perform BFS traversal starting from vertex 1
         System.out.println("BFS starting from vertex 1:");
         graph.bfs(1);
+
+        // Perform DFS traversal starting from vertex 1
+        System.out.println("DFS starting from vertex 1:");
+        graph.dfs(1);
     }
 }
